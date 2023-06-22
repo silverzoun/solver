@@ -1,0 +1,27 @@
+# Load the necessary libraries
+library(pracma)
+
+# Define the function
+function_solver <- function(f, x0) {
+  """
+  This function takes a function and an initial guess as arguments and returns the root of the function.
+  
+  Parameters:
+  f (function): The function to be solved
+  x0 (numeric): The initial guess
+  
+  Returns:
+  numeric: The root of the function
+  """
+  tryCatch({
+    # Find the root of the function using the Bisection method
+    root <- rootsearch(f, x0, x0 + 1, tol = 1e-6, maxiter = 100)
+    
+    # Return the root
+    return(root)
+  }, error = function(e) {
+    # Log the error
+    cat("An error occurred:", conditionMessage(e), "\n")
+    return(NA)
+  })
+}
